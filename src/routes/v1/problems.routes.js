@@ -1,14 +1,15 @@
 const express = require('express');
 
-const {ProblemController } = require('../../controllers/index');
+const {problemController } = require('../../controllers/index');
 
 const problemRouter = express.Router();
-
-problemRouter.get('/ping', ProblemController.pingProblemController);
-problemRouter.get('/:id', ProblemController.getProblem);
-problemRouter.get('/:id', ProblemController.getProblems);
-problemRouter.post('/:id', ProblemController.addProblem);
-problemRouter.delete('/:id',ProblemController.deleteProblem);
-problemRouter.put('/:id',ProblemController.updateProblem);
+//camel case nned to be done 
+//controller is the last layer of middlewares
+problemRouter.get('/ping', problemController.pingProblemController);
+problemRouter.get('/:id', problemController.getProblem);
+problemRouter.get('/:id', problemController.getProblems);
+problemRouter.post('/:id', problemController.addProblem);
+problemRouter.delete('/:id',problemController.deleteProblem);
+problemRouter.put('/:id',problemController.updateProblem);
 
 module.exports = problemRouter;
