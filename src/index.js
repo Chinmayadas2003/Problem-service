@@ -4,6 +4,8 @@ const BaseError = require('./errors/BaseError.js');
 const { PORT } = require('./config/server.config.js');
 
 const apiRouter =require('./routes/index.js');
+const errorHandler = require('./utils/errorHandler.js');
+
 
 const app = express();
 
@@ -21,16 +23,25 @@ app.get('/ping',(req,res)=>{
 })
 
 
+//last middleware if error comes
+app.use(errorHandler);
+
 app.listen(PORT,()=>{
     console.log(`server started at PORT :${PORT}`);
+    
+        // opened a deb connection 
+        // queried on db, but you got wrong syntax query
+        // exception will be thrown
+        
     try{
-        //throw signifies that you have to manually catch a error
-        //finally block
-        throw new BaseError("some error", 404 ,{message:"something is wrong"});
+        //throw new BaseError("Not found",404,"Resource not found",{});
+        //throw new NotFoundError1({});
     } catch(error){
-        console.log("something went wrong");
+        //log the error
+        console.log("something went wrong",error.name,error.stack);
     }
     finally{
+        //close the db connection
         console.log("executed finally");
     }
 
