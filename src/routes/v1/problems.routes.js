@@ -8,8 +8,8 @@ const problemRouter = express.Router();
 //problems in big PR's
 problemRouter.get('/ping', problemController.pingProblemController);
 problemRouter.get('/:id', problemController.getProblem);
-problemRouter.get('/:id', problemController.getProblems);
-problemRouter.post('/:id', problemController.addProblem);
+problemRouter.get('/', problemController.getProblems);
+problemRouter.post('/', problemController.addProblem);
 problemRouter.delete('/:id',problemController.deleteProblem);
 problemRouter.put('/:id',problemController.updateProblem);
 
