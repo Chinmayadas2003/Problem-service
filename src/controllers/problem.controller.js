@@ -26,17 +26,23 @@ async function addProblem(req, res,next){
       }
 }
 //next introduced because this controller is not the last middleware
-function getProblem(req,res,next){
-   try {
-     throw new NotImplemented('addProblem');
-   } catch (error) {
-        next(error);
-   }
-}
-function getProblems(req,res){
+async function getProblem(req,res,next){
     return res.status(StatusCodes.NOT_IMPLEMENTED).json({
         message: 'Not Implemented'
     })
+}
+async function getProblems(req,res, next){
+    try {
+        const response = await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+           success: true,
+           message: 'Successfully fetched all problems',
+           error: {},
+           data: response
+        })
+      } catch (error) {
+           next(error);
+      }
 }
 
 function deleteProblem(req, res){
