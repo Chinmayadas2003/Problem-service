@@ -1,7 +1,11 @@
 const BaseError = require("../errors/BaseError");
 const { StatusCodes }= require('http-status-codes');
 
-
+//4 parameter exlusively works as a error handler not execudted between middleware(express js middleware)
+//if 3 parameters it also works as a middleware and kicks in in between request if placed as such
+// what if error handler has a error it will be handled by last express js error handler
+//class diagram-review //documentation// excellent debugging skills
+//zepto backend codebase
 function errorHandler(err,req,res,next){
     if(err instanceof BaseError){
         return res.status(err.statusCode).json({

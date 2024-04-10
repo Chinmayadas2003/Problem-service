@@ -6,6 +6,7 @@ const mongoose= require('mongoose');
 const apiRouter =require('./routes/index.js');
 const errorHandler = require('./utils/errorHandler.js');
 const connectToDB = require('./config/db.config.js');
+const Problem = require('./models/problem.model.js');
 
 
 const app = express();
@@ -33,7 +34,14 @@ app.use(errorHandler);
 app.listen(PORT, async()=>{
     console.log(`server started at PORT :${PORT}`);
     await connectToDB();
+    //mongoose help us to define schema
+    //make orm queries on our db
     console.log("sucessfully connected to db");
+    /*Problem.create({
+
+    });*/
+
+    
 
 }
 
