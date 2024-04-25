@@ -1,5 +1,5 @@
 const sanitizeMarkdownContent = require("../utils/markdownSanitizer");
-
+// controller call service->repository layer
 class ProblemService {
     constructor(problemRepository){
         this.problemRepository= problemRepository;
@@ -28,6 +28,10 @@ class ProblemService {
             console.log(error);
             throw error;
         }
+    }
+    async deleteProblem(problemId) {
+        const problem = await this.problemRepository.deleteProblem(problemId);
+        return problem;
     }
 }
 
