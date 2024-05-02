@@ -1,3 +1,4 @@
+const logger = require("../config/logger.config");
 const BaseError = require("../errors/BaseError");
 const { StatusCodes }= require('http-status-codes');
 
@@ -15,6 +16,8 @@ function errorHandler(err,req,res,next){
             data: {}// because this is an exception no data is going to be provided
         })
     }
+    //giving 2 logs one for controllers.js and one for internal server error
+    //logger.error('Something went wrong');
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         success: false,
         message: "Something went wrong",
