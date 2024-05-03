@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser =require('body-parser');
 const BaseError = require('./errors/BaseError.js');
 const { PORT } = require('./config/server.config.js');
-
+const mongoose= require('mongoose');
 const apiRouter =require('./routes/index.js');
 const errorHandler = require('./utils/errorHandler.js');
+const connectToDB = require('./config/db.config.js');
+const Problem = require('./models/problem.model.js');
 
 
 const app = express();
@@ -13,8 +15,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
+//what if error handler middleware is initiated in the begining and middle -error handler of express default kicks in
 
 //if any request comes and route starts with /api we map it to apiRouter
+//if next middleware is not called how it reaches the next middleware
 app.use('/api', apiRouter);
 
 
@@ -24,25 +28,21 @@ app.get('/ping',(req,res)=>{
 
 
 //last middleware if error comes
+//write other error classes
 app.use(errorHandler);
 
-app.listen(PORT,()=>{
+app.listen(PORT, async()=>{
     console.log(`server started at PORT :${PORT}`);
-    
-        // opened a deb connection 
-        // queried on db, but you got wrong syntax query
-        // exception will be thrown
-        
-    try{
-        //throw new BaseError("Not found",404,"Resource not found",{});
-        //throw new NotFoundError1({});
-    } catch(error){
-        //log the error
-        console.log("something went wrong",error.name,error.stack);
-    }
-    finally{
-        //close the db connection
-        console.log("executed finally");
-    }
+    await connectToDB();
+    //mongoose help us to define schema
+    //make orm queries on our db
+    console.log("sucessfully connected to db");
+    /*Problem.create({
 
-})
+    });*/
+
+    
+
+}
+
+)
