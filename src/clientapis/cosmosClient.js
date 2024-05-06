@@ -1,10 +1,12 @@
 const { CosmosClient } = require('@azure/cosmos');
+//const { ATLAS_DB_URL, NODE_ENV,key } = require('./server.config');
+const { Key, endpoint } = require('../config/server.config');
 
 
 //connecting your code to cosmos db
-const endPoint = "https://algocode.documents.azure.com:443/";
+const endPoint = endpoint;
 
-const key ="2M1HwWnaVs5qs7GLxklgV5FOnzKLTj2S1PGz4i9XReS6NSLUIt46etIdEpxHTZ4be9oBxaCTrTclACDbe8oasg==";
+const key =Key;
 
 const databaseId= "logging-store";
 
