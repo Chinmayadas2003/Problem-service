@@ -33,7 +33,7 @@ async function getProblem(req,res,next){
         message: 'Not Implemented'
     })
 }
-async function getProblems(req,res, next){
+async function getAllProblems(req,res, next){
     try {
         const response = await problemService.getAllProblems();
         return res.status(StatusCodes.OK).json({
@@ -70,7 +70,7 @@ function updateProblem(req, res){
 module.exports ={
     addProblem,
     getProblem,
-    getProblems,
+    getAllProblems,
     deleteProblem,
     updateProblem,
     pingProblemController

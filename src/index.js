@@ -5,7 +5,7 @@ const { PORT } = require('./config/server.config.js');
 const mongoose= require('mongoose');
 const apiRouter =require('./routes/index.js');
 const errorHandler = require('./utils/errorHandler.js');
-const connectToDB = require('./config/db.config.js');
+const connectToDB = require('./config/dbConfig.js');
 const Problem = require('./models/problem.model.js');
 
 
