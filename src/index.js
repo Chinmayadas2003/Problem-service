@@ -5,7 +5,7 @@ const { PORT } = require('./config/server.config.js');
 const mongoose= require('mongoose');
 const apiRouter =require('./routes/index.js');
 const errorHandler = require('./utils/errorHandler.js');
-const connectToDB = require('./config/dbConfig.js');
+const {connectToDB,connectToLogDB}=require('./config/dbConfig.js');
 const Problem = require('./models/problem.model.js');
 
 
@@ -34,6 +34,7 @@ app.use(errorHandler);
 app.listen(PORT, async()=>{
     console.log(`server started at PORT :${PORT}`);
     await connectToDB();
+    // await connectToLogDB();
     //mongoose help us to define schema
     //make orm queries on our db
     console.log("sucessfully connected to db");
